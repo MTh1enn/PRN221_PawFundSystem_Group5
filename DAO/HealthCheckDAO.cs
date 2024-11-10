@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    internal class HealthCheckDAO
+    public class HealthCheckDAO
     {
+
     }
 }
