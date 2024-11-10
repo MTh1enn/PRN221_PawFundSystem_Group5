@@ -37,10 +37,9 @@ namespace DAO
         }
         public void AddUser(User user)
         {
-
+            var checkUser = GetUserById(user.Id);
             try
             {
-                var checkUser = GetUserById(user.Id);
                 if (checkUser == null)
                 {
                     dbContext.Users.Add(user);
@@ -49,14 +48,15 @@ namespace DAO
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                Console.WriteLine(ex.InnerException?.Message); // Kiểm tra thông tin lỗi chi tiết
+                throw;
             }
         }
         public void UpdateUser(User user)
         {
+            var checkUser = GetUserById(user.Id);
             try
             {
-                var checkUser = GetUserById(user.Id);
                 if (checkUser != null)
                 {
                     dbContext.Entry(checkUser).State = EntityState.Detached;
@@ -72,9 +72,9 @@ namespace DAO
         }
         public void RemoveUser(User user)
         {
+            var checkUser = GetUserById(user.Id);
             try
             {
-                var checkUser = GetUserById(user.Id);
                 if (checkUser != null)
                 {
                     dbContext.Users.Remove(user);

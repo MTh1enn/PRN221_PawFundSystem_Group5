@@ -46,9 +46,11 @@ namespace DAO
                     dbContext.SaveChanges();
                 }
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
-                throw new Exception(ex.Message);
+                Console.WriteLine("Lỗi xảy ra khi lưu thay đổi:");
+                Console.WriteLine(ex.InnerException?.Message); // Kiểm tra thông tin lỗi chi tiết
+                throw;
             }
         }
         public void UpdateEvent(Event ev)
