@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,8 @@ namespace DAO
 {
     public class UserDAO
     {
-        private PawFundContext _context;
-        private static UserDAO instance = null;
-
+        public PawFundContext dbContext;
+        public static UserDAO instance;
         public static UserDAO Instance
         {
             get
@@ -23,15 +23,68 @@ namespace DAO
                 return instance;
             }
         }
-
         public UserDAO()
         {
-            _context = new PawFundContext();
+            dbContext = new PawFundContext();
         }
-
-        public User? getUserByEmail(string email) { 
-            return _context.Users.SingleOrDefault(u => u.Email.Equals( email));
+        public User GetUserById(int id)
+        {
+            return dbContext.Users.SingleOrDefault(m => m.Id.Equals(id));
         }
+        public List<User> GetUsers()
+        {
+            return dbContext.Users.ToList();
+        }
+        public void AddUser(User user)
+        {
 
+            try
+            {
+                var checkUser = GetUserById(user.Id);
+                if (checkUser == null)
+                {
+                    dbContext.Users.Add(user);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void UpdateUser(User user)
+        {
+            try
+            {
+                var checkUser = GetUserById(user.Id);
+                if (checkUser != null)
+                {
+                    dbContext.Entry(checkUser).State = EntityState.Detached;
+                    dbContext.Users.Attach(user);
+                    dbContext.Entry(user).State = EntityState.Modified;
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void RemoveUser(User user)
+        {
+            try
+            {
+                var checkUser = GetUserById(user.Id);
+                if (checkUser != null)
+                {
+                    dbContext.Users.Remove(user);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
