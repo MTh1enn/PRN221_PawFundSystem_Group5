@@ -9,6 +9,7 @@ namespace Repository.IRepository
 {
     public interface IUserRepo
     {
+        public User GetUserByEmail(string email);
         public User GetUserById(int id);
         public List<User> GetUsers();
         public void AddUser(User user);
