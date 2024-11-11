@@ -15,5 +15,6 @@ namespace Service.IService
         public bool UpdateShelter(Shelter shelter);
 
         public bool RemoveShelter(Shelter shelter);
+
     }
 }

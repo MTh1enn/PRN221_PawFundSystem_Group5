@@ -1,0 +1,67 @@
+﻿@page
+@model PRN221_PawFundSystem_Group5.Pages.VolunteerTaskPage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>VolunteerTask</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.Id" class="control-label"></label>
+                <input asp-for="VolunteerTask.Id" class="form-control" />
+                <span asp-validation-for="VolunteerTask.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.AssignedBy" class="control-label"></label>
+                <select asp-for="VolunteerTask.AssignedBy" class ="form-control" asp-items="ViewBag.AssignedBy"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.AssignedTo" class="control-label"></label>
+                <select asp-for="VolunteerTask.AssignedTo" class ="form-control" asp-items="ViewBag.AssignedTo"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.TaskDescription" class="control-label"></label>
+                <input asp-for="VolunteerTask.TaskDescription" class="form-control" />
+                <span asp-validation-for="VolunteerTask.TaskDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.DueDate" class="control-label"></label>
+                <input asp-for="VolunteerTask.DueDate" class="form-control" />
+                <span asp-validation-for="VolunteerTask.DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.CompletedDate" class="control-label"></label>
+                <input asp-for="VolunteerTask.CompletedDate" class="form-control" />
+                <span asp-validation-for="VolunteerTask.CompletedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.Priority" class="control-label"></label>
+                <input asp-for="VolunteerTask.Priority" class="form-control" />
+                <span asp-validation-for="VolunteerTask.Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTask.Status" class="control-label"></label>
+                <input asp-for="VolunteerTask.Status" class="form-control" />
+                <span asp-validation-for="VolunteerTask.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
