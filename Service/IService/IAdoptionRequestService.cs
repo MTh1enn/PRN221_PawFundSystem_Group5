@@ -9,5 +9,6 @@ namespace Service.IService
 {
     internal interface IAdoptionRequestService
     {
+        Task CreateAdoptionRequestAsync(AdoptionRequest adoptionRequest);
     }
 }
