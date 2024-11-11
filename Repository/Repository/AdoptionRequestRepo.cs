@@ -13,5 +13,20 @@ namespace Repository.Repository
     {
         public Task CreateAdoptionRequestAsync(AdoptionRequest adoptionRequest)
         => AdoptionRequestDAO.Instance.CreateAdoptionRequestAsync(adoptionRequest);
+
+        public async Task<List<AdoptionRequest>> GetAll()
+        {
+           return await AdoptionRequestDAO.Instance.GetAll();
+        }
+
+        public async Task<AdoptionRequest> GetById(int id)
+        {
+            return await AdoptionRequestDAO.Instance.GetById(id);
+        }
+
+        public bool Update(AdoptionRequest request)
+        {
+            return AdoptionRequestDAO.Instance.Update(request);
+        }
     }
 }

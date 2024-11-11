@@ -21,7 +21,7 @@ public class AdoptedPetsModel : PageModel
     public async Task OnGetAsync()
     {
         // Giả sử userId là 1
-        int userId = 1;
+        int userId = (int)HttpContext.Session.GetInt32("UserId");
         AdoptedPets = await _petService.GetAdoptedPetsByUserIdAsync(userId);
     }
 

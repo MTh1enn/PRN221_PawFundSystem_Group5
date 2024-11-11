@@ -1,0 +1,80 @@
+﻿@page
+@model PRN221_PawFundSystem_Group5.Pages.ShelterStaff.AdoptionRequestManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>AdoptionRequest Management</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].RequestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].ReviewDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].AdoptionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].Pet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].ReviewedByNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionRequest[0].User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.AdoptionRequest) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdoptionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pet.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewedByNavigation.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
