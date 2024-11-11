@@ -1,4 +1,6 @@
 ﻿using BusinessObjects.Models;
+using Repository.IRepository;
+using Repository.Repository;
 using Service.IService;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,16 @@ namespace Service.Service
 {
     public class AdoptionRequestService : IAdoptionRequestService
     {
-        private readonly PawFundContext _context;
+        private readonly IAdoptionRequestRepo adoptionRequestRepo;
 
-        public AdoptionRequestService(PawFundContext context)
+        public AdoptionRequestService()
         {
-            _context = context;
+            adoptionRequestRepo = new AdoptionRequestRepo();
         }
 
         public async Task CreateAdoptionRequestAsync(AdoptionRequest adoptionRequest)
         {
-            _context.AdoptionRequests.Add(adoptionRequest);
-            await _context.SaveChangesAsync();
+            await adoptionRequestRepo.CreateAdoptionRequestAsync(adoptionRequest);
         }
     }
 }
