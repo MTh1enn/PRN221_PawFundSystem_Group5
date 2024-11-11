@@ -12,7 +12,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IPetService, PetService>();
 builder.Services.AddScoped<IAdoptionRequestService, AdoptionRequestService>();
-
+builder.Services.AddScoped<IHealthCheckService, HealthCheckService>();
 builder.Services.AddScoped<IVolunteerTaskService, VolunteerTaskService>();
 
 builder.Services.AddScoped<IShelterService, ShelterService>();

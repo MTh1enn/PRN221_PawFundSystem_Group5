@@ -20,7 +20,9 @@ namespace Service.Service
         {
             _petRepository = new PetRepo();
         }
-
+        public List<Pet> GetAllPets() { 
+            return _petRepository.GetAllPets();
+        }
         public async Task<List<Pet>> GetAllPetsAsync()
         {
             return await _petRepository.GetAllPetsAsync();

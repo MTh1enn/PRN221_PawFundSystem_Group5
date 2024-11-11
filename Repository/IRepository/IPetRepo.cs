@@ -19,7 +19,7 @@ namespace Repository.IRepository
         public interface IPetRepo
         {
             Task<List<Pet>> GetAllPetsAsync();
-
+            List<Pet> GetAllPets();
             public bool AddPet(Pet pet);
             public bool UpdatePet(Pet pet);
             Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus);
