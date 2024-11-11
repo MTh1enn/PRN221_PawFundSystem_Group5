@@ -1,16 +1,20 @@
 ﻿using BusinessObjects.Models;
 using DAO;
+
 using Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAO;
 
 namespace Repository.Repository
 {
     public class ShelterRepo : IShelterRepo
     {
+        
+
         public bool AddShelter(Shelter shelter)
         => ShelterDAO.Instance.AddShelter(shelter);
 
@@ -25,5 +29,6 @@ namespace Repository.Repository
 
         public bool UpdateShelter(Shelter shelter)
         => ShelterDAO.Instance.UpdateShelter(shelter);
+
     }
 }

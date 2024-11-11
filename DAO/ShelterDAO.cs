@@ -10,8 +10,10 @@ namespace DAO
 {
     public class ShelterDAO
     {
+
         public PawFundContext dbContext;
         public static ShelterDAO instance;
+
         public static ShelterDAO Instance
         {
             get
@@ -23,18 +25,25 @@ namespace DAO
                 return instance;
             }
         }
+
+
         public ShelterDAO()
         {
+
             dbContext = new PawFundContext();
         }
-        
+
         public List<Shelter> GetShelters()
         {
             return dbContext.Shelters.ToList();
         }
+
+        
+
+
         public Shelter GetShelterById(int shelterId)
         {
-            return dbContext.Shelters.SingleOrDefault(m=> m.Id.Equals(shelterId));
+            return dbContext.Shelters.SingleOrDefault(m => m.Id.Equals(shelterId));
         }
         public bool AddShelter(Shelter shelter)
         {
@@ -63,7 +72,8 @@ namespace DAO
                     isSuccess = true;
                 }
                 return isSuccess;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -76,7 +86,7 @@ namespace DAO
                 var checkShelter = GetShelterById(shelter.Id);
                 if (checkShelter != null)
                 {
-                    shelter.ShelterCode= checkShelter.ShelterCode;
+                    shelter.ShelterCode = checkShelter.ShelterCode;
                     dbContext.Entry(checkShelter).State = EntityState.Detached;
                     dbContext.Shelters.Attach(shelter);
                     dbContext.Entry(shelter).State = EntityState.Modified;
@@ -108,6 +118,8 @@ namespace DAO
             {
                 throw new Exception(ex.Message);
             }
+
         }
     }
 }
+

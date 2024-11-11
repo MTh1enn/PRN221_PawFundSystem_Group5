@@ -1,0 +1,77 @@
+﻿@page
+@model PRN221_PawFundSystem_Group5.Pages.HealthCheckPage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>HealthCheck</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.Id" class="control-label"></label>
+                <input asp-for="HealthCheck.Id" class="form-control" />
+                <span asp-validation-for="HealthCheck.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.PetId" class="control-label"></label>
+                <select asp-for="HealthCheck.PetId" class ="form-control" asp-items="ViewBag.PetId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.HealthStatus" class="control-label"></label>
+                <input asp-for="HealthCheck.HealthStatus" class="form-control" />
+                <span asp-validation-for="HealthCheck.HealthStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.HealthStatusDescription" class="control-label"></label>
+                <input asp-for="HealthCheck.HealthStatusDescription" class="form-control" />
+                <span asp-validation-for="HealthCheck.HealthStatusDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.Note" class="control-label"></label>
+                <input asp-for="HealthCheck.Note" class="form-control" />
+                <span asp-validation-for="HealthCheck.Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.Weight" class="control-label"></label>
+                <input asp-for="HealthCheck.Weight" class="form-control" />
+                <span asp-validation-for="HealthCheck.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.Temperature" class="control-label"></label>
+                <input asp-for="HealthCheck.Temperature" class="form-control" />
+                <span asp-validation-for="HealthCheck.Temperature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.CheckDate" class="control-label"></label>
+                <input asp-for="HealthCheck.CheckDate" class="form-control" />
+                <span asp-validation-for="HealthCheck.CheckDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.CheckedBy" class="control-label"></label>
+                <select asp-for="HealthCheck.CheckedBy" class ="form-control" asp-items="ViewBag.CheckedBy"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthCheck.CheckType" class="control-label"></label>
+                <input asp-for="HealthCheck.CheckType" class="form-control" />
+                <span asp-validation-for="HealthCheck.CheckType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

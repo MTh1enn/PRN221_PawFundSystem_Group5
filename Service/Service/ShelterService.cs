@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Service.Service
 {
+
     public class ShelterService: IShelterService
     {
         private IShelterRepo shelterRepo;
@@ -26,10 +27,12 @@ namespace Service.Service
         public Shelter GetShelterById(int shelterId)
         {
             return shelterRepo.GetShelterById(shelterId);
+
         }
 
         public List<Shelter> GetShelters()
         {
+
             return shelterRepo.GetShelters();
         }
 
@@ -41,6 +44,7 @@ namespace Service.Service
         public bool UpdateShelter(Shelter shelter)
         {
             return shelterRepo.UpdateShelter(shelter);
+
         }
     }
 }

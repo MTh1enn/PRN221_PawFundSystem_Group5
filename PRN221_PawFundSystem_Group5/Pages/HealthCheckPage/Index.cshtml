@@ -1,0 +1,84 @@
+﻿@page
+@model PRN221_PawFundSystem_Group5.Pages.HealthCheckPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].HealthStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].HealthStatusDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].Temperature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].CheckDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].CheckType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].CheckedByNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthCheck[0].Pet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.HealthCheck) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HealthStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HealthStatusDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedByNavigation.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pet.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
