@@ -24,16 +24,21 @@ namespace PawFundSystemPagePagesPets
 
         public async Task OnGetAsync()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Pets = await _context.Pets
-                .Where(p => p.OwnerId == userId) 
+            var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int userId = 0;
+            if (int.TryParse(user, out userId))
+            {
+                Pets = await _context.Pets
+                .Where(p => p.OwnerId == userId)
                 .ToListAsync();
+            }
+            
         }
 
         public async Task<IActionResult> OnPostUpdateHealthAsync(int id, string healthStatus)
         {
             var petToUpdate = await _context.Pets.FindAsync(id);
-            if (petToUpdate == null || !petToUpdate.IsAdopted)
+            if (petToUpdate == null || petToUpdate.IsAdopted != true)
             {
                 return NotFound();
             }

@@ -9,6 +9,6 @@ namespace Service.IService
 {
     public interface IPetService
     {
-        Task<List<Pet>> GetAllPetsAsync();
+        public Task<List<Pet>> GetAllPetsAsync();
     }
 }

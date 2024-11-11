@@ -30,9 +30,10 @@ public class AdoptionRequestModel : PageModel
         Pets = await _petService.GetAllPetsAsync();
 
         var user = await _userManager.GetUserAsync(User);
-        if (user != null)
+        int userId = 0;
+        if (int.TryParse(user.Id, out userId))
         {
-            AdoptionRequest.UserId = user.Id;
+            AdoptionRequest.UserId = userId;
         }
     }
 

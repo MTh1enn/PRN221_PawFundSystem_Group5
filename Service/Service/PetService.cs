@@ -1,6 +1,8 @@
 ﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository.IRepository;
+using Repository.IRepository.Repository.IRepository;
+using Repository.Repository;
 using Service.IService;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,9 @@ namespace Service.Service
     {
         private readonly IPetRepo _petRepository;
 
-        public PetService(IPetRepo petRepository)
+        public PetService()
         {
-            _petRepository = petRepository;
+            _petRepository = new PetRepo();
         }
 
         public async Task<List<Pet>> GetAllPetsAsync()

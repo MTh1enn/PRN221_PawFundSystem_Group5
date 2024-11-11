@@ -1,4 +1,5 @@
 using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,9 @@ namespace DAO
             }
             return result;
         }
-       
+        public async Task<List<Pet>> GetAllPetsAsync()
+        {
+            return await context.Pets.ToListAsync();
+        }
     }
 }
