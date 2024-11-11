@@ -10,5 +10,8 @@ namespace Service.IService
     public interface IPetService
     {
         public Task<List<Pet>> GetAllPetsAsync();
+        public Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus);
+
+        public Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId);
     }
 }

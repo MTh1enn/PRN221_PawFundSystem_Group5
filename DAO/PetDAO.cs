@@ -13,14 +13,15 @@ namespace DAO
         private PawFundContext context;
         private static PetDAO instance = null;
 
-        public static PetDAO Instance {  
-            get 
-            { 
-                if(instance == null)
+        public static PetDAO Instance
+        {
+            get
+            {
+                if (instance == null)
                 {
-                    instance= new PetDAO();
-                } 
-                return instance; 
+                    instance = new PetDAO();
+                }
+                return instance;
             }
         }
         public PetDAO()
@@ -59,6 +60,20 @@ namespace DAO
         public async Task<List<Pet>> GetAllPetsAsync()
         {
             return await context.Pets.ToListAsync();
+        }
+        public async Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus)
+        {
+            var pet = await context.Pets.FindAsync(petId);
+            if (pet == null) return false;
+
+            pet.HealthStatus = healthStatus;
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId)
+        {
+            return await context.Pets.Where(p => p.OwnerId == userId && p.IsAdopted == true).ToListAsync();
         }
     }
 }
