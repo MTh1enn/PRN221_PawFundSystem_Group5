@@ -33,8 +33,10 @@ namespace PRN221_PawFundSystem_Group5.Pages
                     HttpContext.Session.SetString("RoleID", roleId);
                     HttpContext.Session.SetString("EmailUser", email);
                     HttpContext.Session.SetInt32("UserId", userId);
-                    Response.Redirect("/AddPet");
                     
+                    if (roleId.Contains("ADMIN")){
+                        Response.Redirect("/Admin");
+                    }
                 }
                
 
