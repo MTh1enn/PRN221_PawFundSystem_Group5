@@ -30,6 +30,8 @@ namespace DAO
 
         public async Task CreateAdoptionRequestAsync(AdoptionRequest adoptionRequest)
         {
+            int maxId = dbContext.AdoptionRequests.ToList().Count;
+            adoptionRequest.Id = maxId + 1;
             dbContext.AdoptionRequests.Add(adoptionRequest);
             await dbContext.SaveChangesAsync();
         }

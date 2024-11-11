@@ -48,7 +48,6 @@ namespace PRN221_PawFundSystem_Group5.Pages
                     {
                         Response.Redirect("/ShelterStaff/Index");
                     }
-                    
                 }
                 else
                     Response.Redirect("/Error");
