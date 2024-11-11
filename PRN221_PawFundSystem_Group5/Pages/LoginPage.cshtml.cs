@@ -9,7 +9,7 @@ namespace PRN221_PawFundSystem_Group5.Pages
     public class LoginPageModel : PageModel
     {
         private readonly IUserService _userService;
-        
+
         public LoginPageModel(IUserService userService)
         {
             _userService = userService;
@@ -25,7 +25,7 @@ namespace PRN221_PawFundSystem_Group5.Pages
             if (email != null && password != null)
             {
                 User account = _userService.GetUserByEmail(email);
-                if (account != null && account.Password!.Equals(password) )
+                if (account != null && account.Password!.Equals(password))
                 {
                     string? roleId = account.Role.ToString() ?? "";
                     string? emailUser = account.Email ?? "";
@@ -33,14 +33,30 @@ namespace PRN221_PawFundSystem_Group5.Pages
                     HttpContext.Session.SetString("RoleID", roleId);
                     HttpContext.Session.SetString("EmailUser", email);
                     HttpContext.Session.SetInt32("UserId", userId);
-                    Response.Redirect("/AddPet");
+
+                    if (roleId.Contains("ADMIN")) {
+                        Response.Redirect("/Admin");
+                    }
+                    if (roleId.Contains("CUSTOMER")) {
+                        Response.Redirect("/HomePage");
+                    }
+                    if (roleId.Contains("VOLUNTEER"))
+                    {
+                        Response.Redirect("/VolunteerPage");
+                    }
+                    if (roleId.Contains("STAFF"))
+                    {
+                        Response.Redirect("/ShelterStaff/Index");
+                    }
                     
                 }
-               
-
                 else
                     Response.Redirect("/Error");
+
+
             }
+
+
 
         }
     }

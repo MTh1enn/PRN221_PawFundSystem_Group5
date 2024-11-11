@@ -6,22 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects.Models;
+using Service.IService;
 
 namespace PRN221_PawFundSystem_Group5.Pages.HealthCheckPage
 {
     public class CreateModel : PageModel
     {
-        private readonly BusinessObjects.Models.PawFundContext _context;
+        private readonly IHealthCheckService _healthCheckService;
+        private readonly IPetService _petService;
+        private readonly IUserService _userService;
 
-        public CreateModel(BusinessObjects.Models.PawFundContext context)
+        public CreateModel(IHealthCheckService healthCheckService, IUserService userService, IPetService petService)
         {
-            _context = context;
+            _healthCheckService = healthCheckService;
+            _userService = userService;
+            _petService=petService;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["CheckedBy"] = new SelectList(_context.Users, "Id", "Email");
-        ViewData["PetId"] = new SelectList(_context.Pets, "Id", "Id");
+        ViewData["CheckedBy"] = new SelectList(_userService.GetUsers(), "Id", "Email");
+        ViewData["PetId"] = new SelectList(_petService.GetAllPets(), "Id", "Id");
             return Page();
         }
 
@@ -35,10 +40,7 @@ namespace PRN221_PawFundSystem_Group5.Pages.HealthCheckPage
             {
                 return Page();
             }
-
-            _context.HealthChecks.Add(HealthCheck);
-            await _context.SaveChangesAsync();
-
+            _healthCheckService.AddHealthCheck(HealthCheck);
             return RedirectToPage("./Index");
         }
     }

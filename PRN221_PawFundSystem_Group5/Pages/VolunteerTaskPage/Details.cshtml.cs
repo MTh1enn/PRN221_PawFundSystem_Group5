@@ -6,28 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Service.IService;
+using Service.Service;
 
 namespace PRN221_PawFundSystem_Group5.Pages.VolunteerTaskPage
 {
     public class DetailsModel : PageModel
     {
-        private readonly BusinessObjects.Models.PawFundContext _context;
+        private readonly IVolunteerTaskService _volunteerTaskService;
 
-        public DetailsModel(BusinessObjects.Models.PawFundContext context)
+        public DetailsModel()
         {
-            _context = context;
+            _volunteerTaskService = new VolunteerTaskService();
         }
 
         public VolunteerTask VolunteerTask { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var volunteertask = await _context.VolunteerTasks.FirstOrDefaultAsync(m => m.Id == id);
+            var volunteertask = _volunteerTaskService.GetVolunteerTaskById(id);
             if (volunteertask == null)
             {
                 return NotFound();
