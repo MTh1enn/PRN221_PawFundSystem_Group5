@@ -55,6 +55,10 @@ namespace DAO
                 return false;
             }
 
+            request.Id = existing.Id;
+            request.UserId = existing.UserId;
+            request.RequestDate = existing.RequestDate;
+            request.ReviewDate = DateTime.Now;
             dbContext.Entry(existing).CurrentValues.SetValues(request);
 
             try

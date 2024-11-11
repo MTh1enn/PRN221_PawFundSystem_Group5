@@ -44,6 +44,12 @@ namespace PRN221_PawFundSystem_Group5.Pages.ShelterStaff.AdoptionRequestManageme
             ViewData["PetId"] = new SelectList(await _petService.GetAllPetsAsync(), "Id", "Id");
             ViewData["ReviewedBy"] = new SelectList(user, "Id", "Email");
             ViewData["UserId"] = new SelectList(user, "Id", "Email");
+            var statusList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "APPROVED", Text = "APPROVED" },
+                new SelectListItem { Value = "REJECTED", Text = "REJECTED" }
+            };
+            ViewData["Status"] = statusList;
             return Page();
         }
 
@@ -58,7 +64,8 @@ namespace PRN221_PawFundSystem_Group5.Pages.ShelterStaff.AdoptionRequestManageme
 
             try
             {
-                AdoptionRequest.AdoptionDate = DateTime.Now;
+                int userId = (int)HttpContext.Session.GetInt32("UserId");
+                AdoptionRequest.ReviewedBy = userId;
                 _adoptionRequestService.Update(AdoptionRequest);
             }
             catch (DbUpdateConcurrencyException)
