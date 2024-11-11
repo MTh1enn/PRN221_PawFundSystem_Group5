@@ -10,16 +10,41 @@ using System.Threading.Tasks;
 
 namespace Service.Service
 {
-    public class ShelterService : IShelterService
+
+    public class ShelterService: IShelterService
     {
-        private readonly IShelterRepo shelterRepo;
-        public ShelterService(ShelterRepo shelter) { 
-            shelterRepo = shelter;
+        private IShelterRepo shelterRepo;
+        public ShelterService()
+        {
+            shelterRepo = new ShelterRepo();
+        }
+
+        public bool AddShelter(Shelter shelter)
+        {
+            return shelterRepo.AddShelter(shelter);
+        }
+
+        public Shelter GetShelterById(int shelterId)
+        {
+            return shelterRepo.GetShelterById(shelterId);
+
         }
 
         public List<Shelter> GetShelters()
         {
-           return shelterRepo.getShelters();
+
+            return shelterRepo.GetShelters();
+        }
+
+        public bool RemoveShelter(Shelter shelter)
+        {
+            return shelterRepo.RemoveShelter(shelter);
+        }
+
+        public bool UpdateShelter(Shelter shelter)
+        {
+            return shelterRepo.UpdateShelter(shelter);
+
         }
     }
 }

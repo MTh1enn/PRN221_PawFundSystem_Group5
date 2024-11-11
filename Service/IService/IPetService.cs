@@ -12,5 +12,10 @@ namespace Service.IService
         public Task<List<Pet>> GetAllPetsAsync();
 
         public bool AddPet(Pet pet);
+
+        public Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus);
+
+        public Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId);
+
     }
 }

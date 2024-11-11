@@ -59,9 +59,9 @@ namespace PawFundSystem.Page.EventPage
             }
 
             var currentEvent = _eventService.GetEventById(Event.Id);
-            if (currentEvent != null && currentEvent.Status == "COMPLETED")
+            if (currentEvent != null && currentEvent.Status == "COMPLETED" && currentEvent.Status == "CANCELLED")
             {
-                ModelState.AddModelError(string.Empty, "You cannot update an event that is already COMPLETED.");
+                ModelState.AddModelError(string.Empty, "You cannot update an event that is already COMPLETED OR CANCELLED.");
                 ViewData["UserId"] = new SelectList(_userService.GetUsers(), "Id", "Email");
                 ViewData["StatusList"] = new List<SelectListItem>
                 {

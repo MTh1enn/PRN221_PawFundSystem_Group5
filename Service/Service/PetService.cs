@@ -26,9 +26,19 @@ namespace Service.Service
             return await _petRepository.GetAllPetsAsync();
         }
 
+        public async Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus)
+        {
+            return await _petRepository.UpdatePetHealthStatusAsync(petId, healthStatus);
+        }
+        public async Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId)
+        {
+            return await _petRepository.GetAdoptedPetsByUserIdAsync(userId);
+
+        }
+
         public bool AddPet(Pet pet)
         {
-            return _petRepository.AddPet(pet);
+            throw new NotImplementedException();
         }
     }
 }

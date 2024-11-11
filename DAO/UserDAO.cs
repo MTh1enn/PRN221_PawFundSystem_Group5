@@ -51,7 +51,8 @@ namespace DAO
                     int maxId = dbContext.Users.ToList().Count;
                     user.Id = maxId + 1;
                     user.CreatedAt = DateTime.Now;
-
+                    user.UpdatedAt = DateTime.Now;
+                    user.Status = "ACTIVE";
                     dbContext.Users.Add(user);
                     dbContext.SaveChanges();
                     isSuccess = true;
@@ -72,6 +73,8 @@ namespace DAO
             {
                 if (checkUser != null)
                 {
+                    user.UpdatedAt = DateTime.Now;
+                    user.CreatedAt = checkUser.CreatedAt;
                     dbContext.Entry(checkUser).State = EntityState.Detached;
                     dbContext.Users.Attach(user);
                     dbContext.Entry(user).State = EntityState.Modified;

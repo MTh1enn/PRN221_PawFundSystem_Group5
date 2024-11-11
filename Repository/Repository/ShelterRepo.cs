@@ -1,4 +1,6 @@
 ﻿using BusinessObjects.Models;
+using DAO;
+
 using Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,22 @@ namespace Repository.Repository
 {
     public class ShelterRepo : IShelterRepo
     {
-        public List<Shelter> getShelters() => ShelterDAO.Instance.getShelters();
         
+
+        public bool AddShelter(Shelter shelter)
+        => ShelterDAO.Instance.AddShelter(shelter);
+
+        public Shelter GetShelterById(int shelterId)
+        => ShelterDAO.Instance.GetShelterById(shelterId);
+
+        public List<Shelter> GetShelters()
+        => ShelterDAO.Instance.GetShelters();
+
+        public bool RemoveShelter(Shelter shelter)
+        => ShelterDAO.Instance.RemoveShelter(shelter);
+
+        public bool UpdateShelter(Shelter shelter)
+        => ShelterDAO.Instance.UpdateShelter(shelter);
+
     }
 }
