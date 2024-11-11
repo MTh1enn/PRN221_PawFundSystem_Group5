@@ -1,5 +1,4 @@
 using BusinessObjects.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +9,9 @@ namespace DAO
 {
     public class PetDAO
     {
-        private readonly PawFundContext _context;
-
-        public PetDAO(PawFundContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<List<Pet>> GetAllPetsAsync()
-        {
-            return await _context.Pets.ToListAsync();
-        }
         private PawFundContext context;
+        private static PetDAO instance = null;
+
         public static PetDAO Instance {  
             get 
             { 
