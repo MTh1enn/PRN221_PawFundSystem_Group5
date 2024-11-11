@@ -21,6 +21,7 @@ namespace Service.Service
             _petRepository = new PetRepo();
         }
         public List<Pet> GetAllPets() { 
+
             return _petRepository.GetAllPets();
         }
         public async Task<List<Pet>> GetAllPetsAsync()
@@ -40,7 +41,7 @@ namespace Service.Service
 
         public bool AddPet(Pet pet)
         {
-            throw new NotImplementedException();
+            return _petRepository.AddPet(pet);
         }
 
         public async Task<Pet> GetPetById(int id)
