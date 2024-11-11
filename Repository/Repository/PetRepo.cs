@@ -1,5 +1,6 @@
 ﻿using BusinessObjects.Models;
 using DAO;
+using Microsoft.EntityFrameworkCore;
 using Repository.IRepository;
 using Repository.IRepository.Repository.IRepository;
 using System;
@@ -31,6 +32,16 @@ namespace Repository.Repository
         {
             return await PetDAO.Instance.GetAdoptedPetsByUserIdAsync(userId);
 
+        }
+
+        public async Task<Pet> GetPetById(int id)
+        {
+            return PetDAO.Instance.GetPetById(id);
+        }
+
+        public bool UpdatePet(Pet pet)
+        {
+            return PetDAO.Instance.UpdatePet(pet);
         }
     }
 }

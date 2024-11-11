@@ -1,0 +1,150 @@
+﻿@page
+@model PRN221_PawFundSystem_Group5.Pages.ShelterStaff.PetManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>PetManagement</h1>
+
+ @* <p>
+     <a asp-page="Create">Create New</a>
+ </p> *@
+<table class="table">
+    <thead>
+        <tr>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Image)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Breed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].IsVaccinated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].IsNeutered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].DeliveryStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Notes)
+            </th>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.Pet[0].RescueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].RescueLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].RescuedBy)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].HealStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].IsAdopted)
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Pet[0].PetStatus)
+            </th> *@
+            @* <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pet[0].Shelter)
+            </th> *@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Pet) {
+        <tr>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Breed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsVaccinated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsNeutered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.RescueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RescueLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RescuedBy)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HealStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdopted)
+            </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.PetStatus)
+            </td> *@
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Owner.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shelter.ManagedByNavigation.Email)
+            </td> *@
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+               @*  <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
