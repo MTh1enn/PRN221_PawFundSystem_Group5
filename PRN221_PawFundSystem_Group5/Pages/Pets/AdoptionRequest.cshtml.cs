@@ -43,7 +43,7 @@ public class AdoptionRequestModel : PageModel
             PetId = petId,
             UserId = UserId, // Hoặc cách khác để lấy ID người dùng
             RequestDate = DateTime.Now,
-            Status = "Pending"
+            Status = "PENDING"
         };
 
         await _adoptionRequestService.CreateAdoptionRequestAsync(adoptionRequest);
