@@ -2,42 +2,84 @@
 @model AdoptedPetsModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h1>Thú cưng đã nhận nuôi</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa; /* Màu nền nhẹ */
+        }
+        h1 {
+            text-align: center; /* Canh giữa tiêu đề */
+            margin-top: 20px; /* Khoảng cách từ trên xuống */
+            margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+        }
+        .table {
+            background-color: white; /* Màu nền cho bảng */
+            border-radius: 5px; /* Bo góc bảng */
+            overflow: hidden; /* Ẩn các góc nhọn */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho bảng */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Màu nền cho nút */
+            border: none; /* Ẩn viền nút */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Màu nền khi hover */
+        }
+        select {
+            margin-right: 10px; /* Khoảng cách giữa select và button */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thú cưng đã nhận nuôi</h1>
 
-@if (Model.AdoptedPets != null && Model.AdoptedPets.Count > 0)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tên</th>
-                <th>Trạng thái sức khỏe</th>
-                <th>Hành động</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pet in Model.AdoptedPets)
-            {
-                <tr>
-                    <td>@pet.Id</td> <!-- Hiển thị ID của thú cưng -->
-                    <td>@pet.Name</td>
-                    <td>@pet.HealthStatus</td>
-                    <td>
-                        <form method="post" asp-page-handler="UpdateHealth" asp-route-petId="@pet.Id">
-                            <select name="healthStatus" required>
-                                <option value="Healthy">Khỏe mạnh</option>
-                                <option value="Sick">Bệnh</option>
-                                <option value="In Treatment">Đang điều trị</option>
-                            </select>
-                            <button type="submit" class="btn btn-primary">Cập nhật sức khỏe</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Không có thú cưng nào đã nhận nuôi.</p>
-}
+        @if (Model.AdoptedPets != null && Model.AdoptedPets.Count > 0)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Trạng thái sức khỏe</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pet in Model.AdoptedPets)
+                    {
+                        <tr>
+                            <td>@pet.Id</td> <!-- Hiển thị ID của thú cưng -->
+                            <td>@pet.Name</td>
+                            <td>@pet.HealthStatus</td>
+                            <td>
+                                <form method="post" asp-page-handler="UpdateHealth" asp-route-petId="@pet.Id" class="form-inline">
+                                    <select name="healthStatus" class="form-control" required>
+                                        <option value="Healthy">Khỏe mạnh</option>
+                                        <option value="Sick">Bệnh</option>
+                                        <option value="In Treatment">Đang điều trị</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Cập nhật sức khỏe</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="text-center">Không có thú cưng nào đã nhận nuôi.</p>
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
