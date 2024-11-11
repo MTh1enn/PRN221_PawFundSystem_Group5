@@ -40,5 +40,15 @@ namespace Service.Service
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Pet> GetPetById(int id)
+        {
+            return await _petRepository.GetPetById(id);
+        }
+
+        public bool UpdatePet(Pet pet)
+        {
+            return _petRepository.UpdatePet(pet);
+        }
     }
 }

@@ -21,10 +21,12 @@ namespace Repository.IRepository
             Task<List<Pet>> GetAllPetsAsync();
 
             public bool AddPet(Pet pet);
-
+            public bool UpdatePet(Pet pet);
             Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus);
 
             Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId);
+
+            public Task<Pet> GetPetById(int id);
 
         }
     }

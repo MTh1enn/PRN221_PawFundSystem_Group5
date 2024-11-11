@@ -36,7 +36,30 @@ namespace DAO
         }
         public Pet GetPetById(int id)
         {
-            return context.Pets.SingleOrDefault(m => m.Id.Equals(id));
+            return context.Pets.Include(p => p.Owner).Include(p => p.Shelter).ThenInclude(s => s.ManagedByNavigation).SingleOrDefault(m => m.Id.Equals(id));
+        }
+
+        public bool UpdatePet(Pet pet)
+        {
+            var existingPet = context.Pets.Find(pet.Id);
+
+            if (existingPet == null)
+            {
+                return false;
+            }
+            // Update specific fields
+            context.Entry(existingPet).CurrentValues.SetValues(pet);
+
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
         public bool AddPet(Pet pet)
         {
@@ -57,9 +80,10 @@ namespace DAO
             }
             return result;
         }
+
         public async Task<List<Pet>> GetAllPetsAsync()
         {
-            return await context.Pets.ToListAsync();
+            return await context.Pets.Include(p => p.Owner).Include(p => p.Shelter).ToListAsync();
         }
         public async Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus)
         {
