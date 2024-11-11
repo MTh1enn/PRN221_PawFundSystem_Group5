@@ -16,5 +16,13 @@ namespace Repository.Repository
         {
             return await PetDAO.Instance.GetAllPetsAsync();
         }
+        public async Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus)
+        {
+            return await PetDAO.Instance.UpdatePetHealthStatusAsync(petId, healthStatus);
+        }
+        public async Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId)
+        {
+            return await PetDAO.Instance.GetAdoptedPetsByUserIdAsync(userId);
+        }
     }
 }

@@ -1,40 +1,37 @@
 ﻿@page
 @model AdoptionRequestModel
-@{
-    ViewData["Title"] = "Yêu Cầu Nhận Nuôi";
-}
 
-<h2>Thông tin thú cưng</h2>
+<h2>Danh sách thú cưng</h2>
 
-@if (Model.Pets == null || !Model.Pets.Any())
-{
-    <p>Không có thú cưng nào để hiển thị.</p>
-}
-else
-{
-    <ul>
-        @foreach (var pet in Model.Pets)
-        {
-            <li>
-                <h3>@pet.Name</h3>
-                <p><strong>Mô tả:</strong> @pet.Description</p>
-                <p><strong>Giống:</strong> @pet.Breed</p>
-                <p><strong>Màu sắc:</strong> @pet.Color</p>
-                <p><strong>Trạng thái:</strong> @pet.PetStatus</p>
-                <button onclick="() => Model.ShowAdoptionForm(pet.Id)">Yêu cầu nhận nuôi</button>
-            </li>
-        }
-    </ul>
-}
+<form method="post">
+    <div class="form-group">
+        <label for="User Id">User  ID:</label>
+        <input type="number" class="form-control" id="User Id" name="User Id" required />
+    </div>
 
-@if (Model.ShowForm)
-{
-    <h3>Gửi yêu cầu nhận nuôi</h3>
-    <EditForm Model="Model.AdoptionRequest" OnValidSubmit="Model.HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <InputTextArea bind-Value="Model.AdoptionRequest.Notes" placeholder="Ghi chú" />
-
-        <button type="submit">Gửi yêu cầu</button>
-    </EditForm>
-}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Mô tả</th>
+                <th>Giống</th>
+                <th>Màu sắc</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pet in Model.Pets)
+            {
+                <tr>
+                    <td>@pet.Name</td>
+                    <td>@pet.Description</td>
+                    <td>@pet.Breed</td>
+                    <td>@pet.Color</td>
+                    <td>
+                        <button type="submit" name="petId" value="@pet.Id" class="btn btn-primary">Gửi yêu cầu nhận nuôi</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

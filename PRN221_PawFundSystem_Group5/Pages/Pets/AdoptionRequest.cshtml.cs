@@ -9,57 +9,44 @@ using Service.Service;
 
 public class AdoptionRequestModel : PageModel
 {
-    private readonly UserManager<IdentityUser> _userManager;
     private readonly IPetService _petService;
-    private readonly IAdoptionRequestService _adoptionRequestService; 
+    private readonly IAdoptionRequestService _adoptionRequestService;
+    //private readonly UserManager<IdentityUser> _userManager;
 
-    public AdoptionRequestModel(UserManager<IdentityUser> userManager, IPetService petService, IAdoptionRequestService adoptionRequestService)
+    public AdoptionRequestModel(IPetService petService, IAdoptionRequestService adoptionRequestService)
     {
-        _userManager = userManager;
         _petService = petService;
         _adoptionRequestService = adoptionRequestService;
+        //_userManager = userManager;
     }
 
-    public List<Pet> Pets { get; set; }
-    public bool ShowForm { get; set; }
-    public AdoptionRequest AdoptionRequest { get; set; } = new AdoptionRequest();
-    public string SuccessMessage { get; set; }
+    public IList<Pet> Pets { get; set; }
+
+    [BindProperty]
+    public int UserId { get; set; }
 
     public async Task OnGetAsync()
     {
         Pets = await _petService.GetAllPetsAsync();
-
-        var user = await _userManager.GetUserAsync(User);
-        int userId = 0;
-        if (int.TryParse(user.Id, out userId))
-        {
-            AdoptionRequest.UserId = userId;
-        }
     }
 
-    public void ShowAdoptionForm(int petId)
+    public async Task<IActionResult> OnPostAdoptAsync(int petId)
     {
-        ShowForm = true;
-        AdoptionRequest.PetId = petId;
-    }
+        //var user = await _userManager.GetUserAsync(User);
+        //if (user == null)
+        //{
+        //    return RedirectToPage("/Login"); 
+        //}
 
-    public async Task<IActionResult> OnPostAsync()
-    {
-        if (int.TryParse(AdoptionRequest.PetId.ToString(), out int petId))
+        var adoptionRequest = new AdoptionRequest
         {
-            AdoptionRequest.PetId = petId;
-        }
-        else
-        {
-            // Xử lý lỗi nếu không thể chuyển đổi
-            ModelState.AddModelError("AdoptionRequest.PetId", "ID thú cưng không hợp lệ.");
-            return Page();
-        }
+            PetId = petId,
+            UserId = UserId, // Hoặc cách khác để lấy ID người dùng
+            RequestDate = DateTime.Now,
+            Status = "Pending"
+        };
 
-        await _adoptionRequestService.CreateAdoptionRequestAsync(AdoptionRequest);
-        SuccessMessage = "Yêu cầu nhận nuôi đã được gửi thành công!";
-
-        // Giữ nguyên trang hiện tại
-        return Page();
+        await _adoptionRequestService.CreateAdoptionRequestAsync(adoptionRequest);
+        return RedirectToPage("./Pets");
     }
 }

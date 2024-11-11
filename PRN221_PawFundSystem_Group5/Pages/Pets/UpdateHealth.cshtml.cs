@@ -1,52 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using BusinessObjects.Models;
-using System.Security.Claims; // Đảm bảo namespace đúng
+using Service.IService;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace PawFundSystemPagePagesPets
+
+
+public class AdoptedPetsModel : PageModel
 {
-    [Authorize(Roles = "Customer")]
-    public class UpdateHealthModel : PageModel
+    private readonly IPetService _petService;
+
+    public AdoptedPetsModel(IPetService petService)
     {
-        private readonly PawFundContext _context;
+        _petService = petService;
+    }
 
-        public UpdateHealthModel(PawFundContext context)
-        {
-            _context = context;
-        }
-        public List<Pet> Pets { get; set; } // Danh sách thú cưng
+    public IList<Pet> AdoptedPets { get; set; }
 
-        [BindProperty]
-        public Pet Pet { get; set; } // Thêm thuộc tính Pet
+    public async Task OnGetAsync()
+    {
+        // Giả sử userId là 1
+        int userId = 1;
+        AdoptedPets = await _petService.GetAdoptedPetsByUserIdAsync(userId);
+    }
 
+    public async Task<IActionResult> OnPostUpdateHealthAsync(int petId, string healthStatus)
+    {
+        // Cập nhật trạng thái sức khỏe cho thú cưng
+        await _petService.UpdatePetHealthStatusAsync(petId, healthStatus);
 
-        public async Task OnGetAsync()
-        {
-            var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            int userId = 0;
-            if (int.TryParse(user, out userId))
-            {
-                Pets = await _context.Pets
-                .Where(p => p.OwnerId == userId)
-                .ToListAsync();
-            }
-            
-        }
-
-        public async Task<IActionResult> OnPostUpdateHealthAsync(int id, string healthStatus)
-        {
-            var petToUpdate = await _context.Pets.FindAsync(id);
-            if (petToUpdate == null || petToUpdate.IsAdopted != true)
-            {
-                return NotFound();
-            }
-
-            petToUpdate.HealthStatus = healthStatus; 
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage(); 
-        }
+        // Quay lại trang hiện tại
+        return RedirectToPage();
     }
 }
