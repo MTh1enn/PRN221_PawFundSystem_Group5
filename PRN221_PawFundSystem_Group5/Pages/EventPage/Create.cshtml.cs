@@ -33,7 +33,7 @@ namespace PawFundSystem.Page.EventPage
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || _eventService.GetEvents() == null || Event == null)
             {
                 return Page();
             }

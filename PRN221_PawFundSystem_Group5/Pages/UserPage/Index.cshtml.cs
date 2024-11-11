@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Service.IService;
-using Service.Service;
 
-namespace PawFundSystem.Page.UserPage
+namespace PRN221_PawFundSystem_Group5.Pages.UserPage
 {
     public class IndexModel : PageModel
     {

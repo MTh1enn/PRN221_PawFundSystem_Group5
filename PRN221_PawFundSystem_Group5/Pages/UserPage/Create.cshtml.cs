@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects.Models;
 using Service.IService;
 
-namespace PawFundSystem.Page.UserPage
+namespace PRN221_PawFundSystem_Group5.Pages.UserPage
 {
     public class CreateModel : PageModel
     {
@@ -30,7 +30,7 @@ namespace PawFundSystem.Page.UserPage
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || _userService.GetUsers() == null || User == null)
             {
                 return Page();
             }

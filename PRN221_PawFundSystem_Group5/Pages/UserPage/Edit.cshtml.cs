@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Service.IService;
 
-namespace PawFundSystem.Page.UserPage
+namespace PRN221_PawFundSystem_Group5.Pages.UserPage
 {
     public class EditModel : PageModel
     {
@@ -30,7 +30,7 @@ namespace PawFundSystem.Page.UserPage
                 return NotFound();
             }
 
-            var user = _userService.GetUserById(id);
+            var user =  _userService.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
