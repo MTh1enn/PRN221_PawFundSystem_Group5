@@ -37,11 +37,11 @@ public class AdoptionRequestModel : PageModel
         //{
         //    return RedirectToPage("/Login"); 
         //}
-
+        int userId = (int)HttpContext.Session.GetInt32("UserId");
         var adoptionRequest = new AdoptionRequest
         {
             PetId = petId,
-            UserId = UserId, // Hoặc cách khác để lấy ID người dùng
+            UserId = userId, 
             RequestDate = DateTime.Now,
             Status = "PENDING"
         };
