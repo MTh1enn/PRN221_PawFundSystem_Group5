@@ -56,4 +56,9 @@ public partial class Pet
     public virtual User? Owner { get; set; }
 
     public virtual Shelter? Shelter { get; set; }
+    public string? HealthStatus { get; set; }
+
+    public bool IsAdopted { get; set; }
+
+    public string OwnerId { get; set; }
 }
