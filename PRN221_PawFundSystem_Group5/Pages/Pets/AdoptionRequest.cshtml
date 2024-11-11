@@ -57,16 +57,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var pet in Model.Pets)
+                    @if (Model.Pets != null && Model.Pets.Count > 0)
+                    {
+                        foreach (var pet in Model.Pets)
+                        {
+                            <tr>
+                                <td>@pet.Name</td>
+                                <td>@pet.Description</td>
+                                <td>@pet.Breed</td>
+                                <td>@pet.Color</td>
+                                <td>
+                                    <button type="submit" name="petId" value="@pet.Id" class="btn btn-primary">Gửi yêu cầu nhận nuôi</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
                     {
                         <tr>
-                            <td>@pet.Name</td>
-                            <td>@pet.Description</td>
-                            <td>@pet.Breed</td>
-                            <td>@pet.Color</td>
-                            <td>
-                                <button type="submit" name="petId" value="@pet.Id" class="btn btn-primary">Gửi yêu cầu nhận nuôi</button>
-                            </td>
+                            <td colspan="5" class="text-center">Không có thú cưng nào để hiển thị.</td>
                         </tr>
                     }
                 </tbody>
