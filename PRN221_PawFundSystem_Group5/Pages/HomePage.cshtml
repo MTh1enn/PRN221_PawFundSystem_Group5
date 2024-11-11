@@ -1,0 +1,287 @@
+﻿@page
+@model PRN221_PawFundSystem_Group5.Pages.HomePageModel
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+
+<div class="home-container">
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <h1>PawFund</h1>
+        </div>
+        <nav class="navbar">
+            <a href="#about">About Us</a>
+            <a href="#adopt">Adopt</a>
+            <a href="#donate">Donate</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Give a Home to a Pet in Need</h2>
+            <p>Help abandoned animals find a loving family. Adopt, Donate, or Volunteer today!</p>
+            <div class="cta-buttons">
+                <a href="#adopt" class="cta-button">Adopt Now</a>
+                <a href="#donate" class="cta-button">Donate</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Statement -->
+    <section class="mission" id="about">
+        <h3>Our Mission</h3>
+        <p>PawFund is dedicated to rescuing abandoned animals and giving them a second chance at life. Your support helps us provide food, shelter, and love to animals in need.</p>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <h3>How It Works</h3>
+        <div class="steps">
+            <div class="step">
+                <h4>Step 1: Choose a Pet</h4>
+                <p>Browse through our available pets and select the one you would like to adopt.</p>
+            </div>
+            <div class="step">
+                <h4>Step 2: Apply for Adoption</h4>
+                <p>Fill out the adoption application form to start the process.</p>
+            </div>
+            <div class="step">
+                <h4>Step 3: Bring Your New Friend Home</h4>
+                <p>Once approved, we will arrange a meeting for you to bring your new pet home!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Dashboard Buttons Section -->
+    <section class="dashboard-buttons-section">
+        <h3>What do you want?</h3>
+        <div class="dashboard-buttons">
+            
+            <a class="dashboard-button" href="/Pets/AdoptionRequest">
+                <div class="icon">🐾</div>
+                <div class="button-text">Adopt a Pet</div>
+            </a>
+            
+            <a class="dashboard-button" href="/Pets/UpdateHealth">
+                <div class="icon">🤝</div>
+                <div class="button-text">Update Health Checking</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="contact-info">
+            <p>Contact us: info@pawfund.org</p>
+            <div class="social-links">
+                <a href="#">Facebook</a> |
+                <a href="#">Instagram</a> |
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        line-height: 1.6;
+    }
+
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #5c6bc0;
+        color: white;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+        font-weight: bold;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+        color: #ffca28;
+    }
+
+    .hero {
+        background-image: url('hero-bg.jpg');
+        background-size: cover;
+        color: cornflowerblue;
+        text-align: center;
+        padding: 120px 20px;
+        width: 100%;
+        background-position: center;
+        position: relative;
+    }
+
+    .hero-content {
+        max-width: 900px;
+        margin: 0 auto;
+        z-index: 1;
+    }
+
+    .hero h2 {
+        font-size: 3rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+    }
+
+    .cta-buttons .cta-button {
+        background-color: #ffca28;
+        color: #5c6bc0;
+        padding: 15px 25px;
+        margin: 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .cta-buttons .cta-button:hover {
+        background-color: #ffb300;
+        transform: translateY(-3px);
+    }
+
+    .mission, .how-it-works {
+        padding: 60px 20px;
+        text-align: center;
+        width: 100%;
+        background-color: #f1f1f1;
+        margin-top: 20px;
+    }
+
+    .mission h3, .how-it-works h3 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .mission p, .how-it-works p {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    .how-it-works .steps {
+        display: flex;
+        justify-content: space-around;
+        text-align: left;
+        margin-top: 40px;
+    }
+
+    .step {
+        flex: 1;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin: 0 10px;
+        transition: transform 0.3s;
+    }
+
+    .step:hover {
+        transform: translateY(-5px);
+    }
+
+    .footer {
+        background-color: #343a40;
+        color: white;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .footer .social-links a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .footer .social-links a:hover {
+        color: #ffca28;
+    }
+
+    .dashboard-buttons-section {
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .dashboard-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .dashboard-button {
+        background-color: #28a745;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        height: 120px;
+    }
+
+        .dashboard-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-button .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-button .button-text {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    
+</style>

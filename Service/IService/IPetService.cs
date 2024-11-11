@@ -11,6 +11,7 @@ namespace Service.IService
     {
         public Task<List<Pet>> GetAllPetsAsync();
 
+        public List<Pet> GetAllPets();
         public bool AddPet(Pet pet);
         public bool UpdatePet(Pet pet);
 
