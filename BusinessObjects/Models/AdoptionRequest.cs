@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace BusinessObjects.Models;
 
-public partial class AdoptionRequest
+public class AdoptionRequest
 {
     public int Id { get; set; }
 
     public int? PetId { get; set; }
 
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 
     public DateTime? RequestDate { get; set; }
 

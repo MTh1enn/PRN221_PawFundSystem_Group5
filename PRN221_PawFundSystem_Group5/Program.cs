@@ -1,3 +1,5 @@
+﻿using Repository.IRepository;
+using Repository.Repository;
 using Service.IService;
 using Service.Service;
 
@@ -10,6 +12,13 @@ builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSession();
 var app = builder.Build();
+
+builder.Services.AddRazorPages();
+
+// Đăng ký các dịch vụ mà bạn sử dụng
+builder.Services.AddScoped<IPetRepo, PetRepo>();
+builder.Services.AddScoped<IPetService, PetService>();
+builder.Services.AddScoped<IAdoptionRequestService, AdoptionRequestService>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

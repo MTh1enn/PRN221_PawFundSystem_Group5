@@ -1,0 +1,20 @@
+﻿@page
+@model PawFundSystemPagePagesPets.UpdateHealthModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>Update Pet Health</h2>
+
+<form method="post">
+    <div>
+        <label for="HealthStatus">Health Status:</label>
+        <select asp-for="Pet.HealthStatus" id="HealthStatus">
+            <option value="Healthy">Healthy</option>
+            <option value="Sick">Sick</option>
+            <option value="In Treatment">In Treatment</option>
+        </select>
+    </div>
+    <input type="hidden" asp-for="Pet.Id" />
+    <button type="submit">Update Health Status</button>
+</form>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>

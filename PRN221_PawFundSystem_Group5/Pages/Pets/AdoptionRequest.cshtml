@@ -1,0 +1,40 @@
+﻿@page
+@model AdoptionRequestModel
+@{
+    ViewData["Title"] = "Yêu Cầu Nhận Nuôi";
+}
+
+<h2>Thông tin thú cưng</h2>
+
+@if (Model.Pets == null || !Model.Pets.Any())
+{
+    <p>Không có thú cưng nào để hiển thị.</p>
+}
+else
+{
+    <ul>
+        @foreach (var pet in Model.Pets)
+        {
+            <li>
+                <h3>@pet.Name</h3>
+                <p><strong>Mô tả:</strong> @pet.Description</p>
+                <p><strong>Giống:</strong> @pet.Breed</p>
+                <p><strong>Màu sắc:</strong> @pet.Color</p>
+                <p><strong>Trạng thái:</strong> @pet.PetStatus</p>
+                <button onclick="() => Model.ShowAdoptionForm(pet.Id)">Yêu cầu nhận nuôi</button>
+            </li>
+        }
+    </ul>
+}
+
+@if (Model.ShowForm)
+{
+    <h3>Gửi yêu cầu nhận nuôi</h3>
+    <EditForm Model="Model.AdoptionRequest" OnValidSubmit="Model.HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <InputTextArea bind-Value="Model.AdoptionRequest.Notes" placeholder="Ghi chú" />
+
+        <button type="submit">Gửi yêu cầu</button>
+    </EditForm>
+}
