@@ -23,8 +23,6 @@ public partial class PawFundContext : DbContext
 
     public virtual DbSet<HealthCheck> HealthChecks { get; set; }
 
-    public virtual DbSet<Notification> Notifications { get; set; }
-
     public virtual DbSet<Pet> Pets { get; set; }
 
     public virtual DbSet<Shelter> Shelters { get; set; }
@@ -41,7 +39,7 @@ public partial class PawFundContext : DbContext
     {
         modelBuilder.Entity<AdoptionRequest>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Adoption__3214EC075BDE72E3");
+            entity.HasKey(e => e.Id).HasName("PK__Adoption__3214EC07F7257D54");
 
             entity.ToTable("AdoptionRequest");
 
@@ -59,20 +57,20 @@ public partial class PawFundContext : DbContext
 
             entity.HasOne(d => d.Pet).WithMany(p => p.AdoptionRequests)
                 .HasForeignKey(d => d.PetId)
-                .HasConstraintName("FK__AdoptionR__PetId__619B8048");
+                .HasConstraintName("FK__AdoptionR__PetId__27F8EE98");
 
             entity.HasOne(d => d.ReviewedByNavigation).WithMany(p => p.AdoptionRequestReviewedByNavigations)
                 .HasForeignKey(d => d.ReviewedBy)
-                .HasConstraintName("FK__AdoptionR__Revie__6383C8BA");
+                .HasConstraintName("FK__AdoptionR__Revie__29E1370A");
 
             entity.HasOne(d => d.User).WithMany(p => p.AdoptionRequestUsers)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__AdoptionR__UserI__628FA481");
+                .HasConstraintName("FK__AdoptionR__UserI__28ED12D1");
         });
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Event__3214EC07AB420AE1");
+            entity.HasKey(e => e.Id).HasName("PK__Event__3214EC07449DA1C8");
 
             entity.ToTable("Event");
 
@@ -92,12 +90,12 @@ public partial class PawFundContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Events)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Event__UserId__5812160E");
+                .HasConstraintName("FK__Event__UserId__1E6F845E");
         });
 
         modelBuilder.Entity<Feedback>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Feedback__3214EC07D4B49C8B");
+            entity.HasKey(e => e.Id).HasName("PK__Feedback__3214EC07D5DF5A63");
 
             entity.ToTable("Feedback");
 
@@ -107,16 +105,16 @@ public partial class PawFundContext : DbContext
 
             entity.HasOne(d => d.Pet).WithMany(p => p.Feedbacks)
                 .HasForeignKey(d => d.PetId)
-                .HasConstraintName("FK__Feedback__PetId__71D1E811");
+                .HasConstraintName("FK__Feedback__PetId__345EC57D");
 
             entity.HasOne(d => d.User).WithMany(p => p.Feedbacks)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Feedback__UserId__70DDC3D8");
+                .HasConstraintName("FK__Feedback__UserId__336AA144");
         });
 
         modelBuilder.Entity<HealthCheck>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__HealthCh__3214EC073EB88FFD");
+            entity.HasKey(e => e.Id).HasName("PK__HealthCh__3214EC07F16ED2EE");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.CheckDate).HasColumnType("datetime");
@@ -133,35 +131,16 @@ public partial class PawFundContext : DbContext
 
             entity.HasOne(d => d.CheckedByNavigation).WithMany(p => p.HealthChecks)
                 .HasForeignKey(d => d.CheckedBy)
-                .HasConstraintName("FK__HealthChe__Check__693CA210");
+                .HasConstraintName("FK__HealthChe__Check__2F9A1060");
 
             entity.HasOne(d => d.Pet).WithMany(p => p.HealthChecks)
                 .HasForeignKey(d => d.PetId)
-                .HasConstraintName("FK__HealthChe__PetId__68487DD7");
-        });
-
-        modelBuilder.Entity<Notification>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Notifica__3214EC072A3C9B76");
-
-            entity.ToTable("Notification");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Body).HasColumnType("text");
-            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            entity.Property(e => e.IsRead).HasDefaultValue(false);
-            entity.Property(e => e.Title)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-
-            entity.HasOne(d => d.User).WithMany(p => p.Notifications)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Notificat__UserI__6D0D32F4");
+                .HasConstraintName("FK__HealthChe__PetId__2EA5EC27");
         });
 
         modelBuilder.Entity<Pet>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pet__3214EC075F955842");
+            entity.HasKey(e => e.Id).HasName("PK__Pet__3214EC074FD54382");
 
             entity.ToTable("Pet");
 
@@ -179,6 +158,9 @@ public partial class PawFundContext : DbContext
             entity.Property(e => e.Gender)
                 .HasMaxLength(10)
                 .IsUnicode(false);
+            entity.Property(e => e.HealStatus)
+                .HasMaxLength(255)
+                .IsUnicode(false);
             entity.Property(e => e.Image)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -194,18 +176,22 @@ public partial class PawFundContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
+            entity.HasOne(d => d.Owner).WithMany(p => p.Pets)
+                .HasForeignKey(d => d.OwnerId)
+                .HasConstraintName("FK__Pet__OwnerId__19AACF41");
+
             entity.HasOne(d => d.Shelter).WithMany(p => p.Pets)
                 .HasForeignKey(d => d.ShelterId)
-                .HasConstraintName("FK__Pet__ShelterId__5441852A");
+                .HasConstraintName("FK__Pet__ShelterId__1A9EF37A");
         });
 
         modelBuilder.Entity<Shelter>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Shelter__3214EC07890D0279");
+            entity.HasKey(e => e.Id).HasName("PK__Shelter__3214EC07C8B46B8B");
 
             entity.ToTable("Shelter");
 
-            entity.HasIndex(e => e.ShelterCode, "UQ__Shelter__756263206E128717").IsUnique();
+            entity.HasIndex(e => e.ShelterCode, "UQ__Shelter__75626320BB85C986").IsUnique();
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Location)
@@ -220,16 +206,16 @@ public partial class PawFundContext : DbContext
 
             entity.HasOne(d => d.ManagedByNavigation).WithMany(p => p.Shelters)
                 .HasForeignKey(d => d.ManagedBy)
-                .HasConstraintName("FK__Shelter__Managed__4E88ABD4");
+                .HasConstraintName("FK__Shelter__Managed__13F1F5EB");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__User__3214EC070D952980");
+            entity.HasKey(e => e.Id).HasName("PK__User__3214EC0792C344FD");
 
             entity.ToTable("User");
 
-            entity.HasIndex(e => e.Email, "UQ__User__A9D10534ECB1E029").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__User__A9D10534E96FE6D0").IsUnique();
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Address)
@@ -251,7 +237,7 @@ public partial class PawFundContext : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(15)
                 .IsUnicode(false);
-            entity.Property(e => e.Position)
+            entity.Property(e => e.Role)
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Status)
@@ -262,7 +248,7 @@ public partial class PawFundContext : DbContext
 
         modelBuilder.Entity<VolunteerTask>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Voluntee__3214EC07A4F53C55");
+            entity.HasKey(e => e.Id).HasName("PK__Voluntee__3214EC077FDC518E");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.CompletedDate).HasColumnType("datetime");
@@ -277,11 +263,11 @@ public partial class PawFundContext : DbContext
 
             entity.HasOne(d => d.AssignedByNavigation).WithMany(p => p.VolunteerTaskAssignedByNavigations)
                 .HasForeignKey(d => d.AssignedBy)
-                .HasConstraintName("FK__Volunteer__Assig__5CD6CB2B");
+                .HasConstraintName("FK__Volunteer__Assig__2334397B");
 
             entity.HasOne(d => d.AssignedToNavigation).WithMany(p => p.VolunteerTaskAssignedToNavigations)
                 .HasForeignKey(d => d.AssignedTo)
-                .HasConstraintName("FK__Volunteer__Assig__5DCAEF64");
+                .HasConstraintName("FK__Volunteer__Assig__24285DB4");
         });
 
         OnModelCreatingPartial(modelBuilder);
