@@ -18,7 +18,6 @@ namespace PawFundSystem.Page.EventPage
         {
             _eventService = eventService;
         }
-
         public IList<Event> Event { get;set; } = default!;
         public int PageSize { get; set; } = 4;
         public int CurrentPage { get; set; } = 1;

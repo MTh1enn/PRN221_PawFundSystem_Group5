@@ -35,28 +35,33 @@ namespace DAO
         {
             return dbContext.Events.ToList();
         }
-        public void AddEvent(Event ev)
+        public bool AddEvent(Event ev)
         {
+            bool isSuccess = false;
             Event checkEvent = GetEventById(ev.Id);
             try
             {
                 if (checkEvent == null)
                 {
+                    ev.Status = "SCHEDULED";
                     dbContext.Events.Add(ev);
                     dbContext.SaveChanges();
+                    isSuccess = true;
                 }
+                return isSuccess;
             }
             catch (DbUpdateException ex)
             {
                 Console.WriteLine("Lỗi xảy ra khi lưu thay đổi:");
-                Console.WriteLine(ex.InnerException?.Message); // Kiểm tra thông tin lỗi chi tiết
+                Console.WriteLine(ex.InnerException?.Message);
                 throw;
             }
         }
-        public void UpdateEvent(Event ev)
+        public bool UpdateEvent(Event ev)
         {
             try
             {
+                bool isSuccess = false;
                 Event checkEvent = GetEventById(ev.Id);
                 if (checkEvent != null)
                 {
@@ -64,23 +69,31 @@ namespace DAO
                     dbContext.Events.Attach(ev);
                     dbContext.Entry(ev).State = EntityState.Modified;
                     dbContext.SaveChanges();
+                    isSuccess = true;
                 }
+                return isSuccess;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public void RemoveEvent(Event ev)
+        public bool RemoveEvent(Event ev)
         {
             Event checkEvent = GetEventById(ev.Id);
             try
             {
-                if (checkEvent != null)
+                bool isSuccess = false;
+                if (checkEvent != null && ev.Status.Equals("SCHEDULED"))
                 {
-                    dbContext.Events.Remove(ev);
+                    ev.Status = "CANCELLED";
+                    dbContext.Entry(checkEvent).State = EntityState.Detached;
+                    dbContext.Events.Attach(ev);
+                    dbContext.Entry(ev).State = EntityState.Modified;
                     dbContext.SaveChanges();
+                    isSuccess = true;
                 }
+                return isSuccess;
             }
             catch (Exception ex)
             {

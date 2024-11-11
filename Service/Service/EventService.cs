@@ -17,9 +17,9 @@ namespace Service.Service
         {
             eventRepo = new EventRepo();
         }
-        public void AddEvent(Event ev)
+        public bool AddEvent(Event ev)
         {
-            eventRepo.AddEvent(ev);
+            return eventRepo.AddEvent(ev);
         }
 
         public Event GetEventById(int id)
@@ -32,14 +32,14 @@ namespace Service.Service
             return eventRepo.GetEvents();
         }
 
-        public void RemoveEvent(Event ev)
+        public bool RemoveEvent(Event ev)
         {
-            eventRepo.RemoveEvent(ev);
+            return eventRepo.RemoveEvent(ev);
         }
 
-        public void UpdateEvent(Event ev)
+        public bool UpdateEvent(Event ev)
         {
-            eventRepo.UpdateEvent(ev);
+            return eventRepo.UpdateEvent(ev);
         }
     }
 }

@@ -40,6 +40,12 @@ namespace PawFundSystem.Page.EventPage
             }
             Event = events;
             ViewData["UserId"] = new SelectList(_userService.GetUsers(), "Id", "Email");
+            var statusList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "SCHEDULED", Text = "SCHEDULED" },
+                new SelectListItem { Value = "COMPLETED", Text = "COMPLETED" }
+            };
+            ViewData["StatusList"] = statusList;
             return Page();
         }
 
@@ -52,7 +58,20 @@ namespace PawFundSystem.Page.EventPage
                 return Page();
             }
 
-            _eventService.UpdateEvent(Event);
+            var currentEvent = _eventService.GetEventById(Event.Id);
+            if (currentEvent != null && currentEvent.Status == "COMPLETED")
+            {
+                ModelState.AddModelError(string.Empty, "You cannot update an event that is already COMPLETED.");
+                ViewData["UserId"] = new SelectList(_userService.GetUsers(), "Id", "Email");
+                ViewData["StatusList"] = new List<SelectListItem>
+                {
+                new SelectListItem { Value = "SCHEDULED", Text = "SCHEDULED" },
+                new SelectListItem { Value = "COMPLETED", Text = "COMPLETED" }
+                };
+                return Page();
+            }
+
+            bool checkUpdate = _eventService.UpdateEvent(Event);
             return RedirectToPage("./Index");
         }
 

@@ -8,6 +8,12 @@
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-danger">
+        @Model.Message
+    </div>
+}
 <div>
     <h4>Event</h4>
     <hr />

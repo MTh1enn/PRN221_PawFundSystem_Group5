@@ -13,11 +13,11 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Event.Id" class="control-label"></label>
                 <input asp-for="Event.Id" class="form-control" />
                 <span asp-validation-for="Event.Id" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="Event.UserId" class="control-label"></label>
                 <select asp-for="Event.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
@@ -47,11 +47,11 @@
                 <input asp-for="Event.Location" class="form-control" />
                 <span asp-validation-for="Event.Location" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Event.Status" class="control-label"></label>
                 <input asp-for="Event.Status" class="form-control" />
                 <span asp-validation-for="Event.Status" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
