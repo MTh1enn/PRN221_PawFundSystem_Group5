@@ -19,6 +19,9 @@ namespace Repository.IRepository
         public interface IPetRepo
         {
             Task<List<Pet>> GetAllPetsAsync();
+            Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus);
+
+            Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId);
         }
     }
 }

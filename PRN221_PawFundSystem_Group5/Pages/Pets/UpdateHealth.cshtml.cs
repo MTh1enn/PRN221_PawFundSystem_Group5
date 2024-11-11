@@ -1,52 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using BusinessObjects.Models;
-using System.Security.Claims; // Đảm bảo namespace đúng
+using Service.IService;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace PawFundSystemPagePagesPets
-{
-    [Authorize(Roles = "Customer")]
-    public class UpdateHealthModel : PageModel
+
+
+    public class AdoptedPetsModel : PageModel
     {
-        private readonly PawFundContext _context;
+        private readonly IPetService _petService;
 
-        public UpdateHealthModel(PawFundContext context)
+        public AdoptedPetsModel(IPetService petService)
         {
-            _context = context;
+            _petService = petService;
         }
-        public List<Pet> Pets { get; set; } // Danh sách thú cưng
 
-        [BindProperty]
-        public Pet Pet { get; set; } // Thêm thuộc tính Pet
-
+        public IList<Pet> AdoptedPets { get; set; }
 
         public async Task OnGetAsync()
         {
-            var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            int userId = 0;
-            if (int.TryParse(user, out userId))
-            {
-                Pets = await _context.Pets
-                .Where(p => p.OwnerId == userId)
-                .ToListAsync();
-            }
-            
+            // Giả sử userId là 1
+            int userId = 1;
+            AdoptedPets = await _petService.GetAdoptedPetsByUserIdAsync(userId);
         }
 
-        public async Task<IActionResult> OnPostUpdateHealthAsync(int id, string healthStatus)
+        public async Task<IActionResult> OnPostUpdateHealthAsync(int petId, string healthStatus)
         {
-            var petToUpdate = await _context.Pets.FindAsync(id);
-            if (petToUpdate == null || petToUpdate.IsAdopted != true)
-            {
-                return NotFound();
-            }
+            // Cập nhật trạng thái sức khỏe cho thú cưng
+            await _petService.UpdatePetHealthStatusAsync(petId, healthStatus);
 
-            petToUpdate.HealthStatus = healthStatus; 
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage(); 
+            // Quay lại trang hiện tại
+            return RedirectToPage();
         }
     }
-}

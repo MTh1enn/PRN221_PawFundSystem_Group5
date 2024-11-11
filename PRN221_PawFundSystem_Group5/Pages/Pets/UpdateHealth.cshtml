@@ -1,20 +1,43 @@
 ﻿@page
-@model PawFundSystemPagePagesPets.UpdateHealthModel
+@model AdoptedPetsModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h2>Update Pet Health</h2>
+<h1>Thú cưng đã nhận nuôi</h1>
 
-<form method="post">
-    <div>
-        <label for="HealthStatus">Health Status:</label>
-        <select asp-for="Pet.HealthStatus" id="HealthStatus">
-            <option value="Healthy">Healthy</option>
-            <option value="Sick">Sick</option>
-            <option value="In Treatment">In Treatment</option>
-        </select>
-    </div>
-    <input type="hidden" asp-for="Pet.Id" />
-    <button type="submit">Update Health Status</button>
-</form>
-
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@if (Model.AdoptedPets != null && Model.AdoptedPets.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Trạng thái sức khỏe</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pet in Model.AdoptedPets)
+            {
+                <tr>
+                    <td>@pet.Id</td> <!-- Hiển thị ID của thú cưng -->
+                    <td>@pet.Name</td>
+                    <td>@pet.HealthStatus</td>
+                    <td>
+                        <form method="post" asp-page-handler="UpdateHealth" asp-route-petId="@pet.Id">
+                            <select name="healthStatus" required>
+                                <option value="Healthy">Khỏe mạnh</option>
+                                <option value="Sick">Bệnh</option>
+                                <option value="In Treatment">Đang điều trị</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Cập nhật sức khỏe</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không có thú cưng nào đã nhận nuôi.</p>
+}

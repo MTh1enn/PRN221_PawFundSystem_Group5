@@ -60,5 +60,19 @@ namespace DAO
         {
             return await context.Pets.ToListAsync();
         }
+        public async Task<bool> UpdatePetHealthStatusAsync(int petId, string healthStatus)
+        {
+            var pet = await context.Pets.FindAsync(petId);
+            if (pet == null) return false;
+
+            pet.HealthStatus = healthStatus;
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<List<Pet>> GetAdoptedPetsByUserIdAsync(int userId)
+        {
+            return await context.Pets.Where(p => p.OwnerId == userId && p.IsAdopted == true).ToListAsync();
+        }
     }
 }
