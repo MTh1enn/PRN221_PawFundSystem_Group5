@@ -48,4 +48,9 @@ public partial class Pet
     public virtual ICollection<HealthCheck> HealthChecks { get; set; } = new List<HealthCheck>();
 
     public virtual Shelter? Shelter { get; set; }
+    public string? HealthStatus { get; set; }
+
+    public bool IsAdopted { get; set; }
+
+    public string OwnerId { get; set; }
 }
