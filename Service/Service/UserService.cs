@@ -18,6 +18,11 @@ namespace Service.Service
             userRepo = new UserRepo();
         }
 
+        public User GetUserByEmail(string email)
+        {
+           return userRepo.GetUserByEmail(email);
+        }
+
         public void AddUser(User user)
         {
             userRepo.AddUser(user);
