@@ -1,4 +1,5 @@
 using BusinessObjects.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service.IService;
@@ -24,15 +25,18 @@ namespace PRN221_PawFundSystem_Group5.Pages
             if (email != null && password != null)
             {
                 User account = _userService.GetUserByEmail(email);
-                if (account != null && account.Password!.Equals(password) && account.Role.Equals("Staff"))
+                if (account != null && account.Password!.Equals(password) )
                 {
                     string? roleId = account.Role.ToString() ?? "";
                     string? emailUser = account.Email ?? "";
+                    int userId = account.Id;
                     HttpContext.Session.SetString("RoleID", roleId);
                     HttpContext.Session.SetString("EmailUser", email);
-                    Response.Redirect("/PetPage");
+                    HttpContext.Session.SetInt32("UserId", userId);
+                    Response.Redirect("/AddPet");
+                    
                 }
-
+               
 
                 else
                     Response.Redirect("/Error");

@@ -16,5 +16,9 @@ namespace Repository.Repository
         {
             return await PetDAO.Instance.GetAllPetsAsync();
         }
+
+        public bool AddPet(Pet pet) { 
+            return PetDAO.Instance.AddPet(pet);
+        }
     }
 }

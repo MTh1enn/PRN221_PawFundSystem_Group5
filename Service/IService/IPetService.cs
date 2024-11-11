@@ -10,5 +10,7 @@ namespace Service.IService
     public interface IPetService
     {
         public Task<List<Pet>> GetAllPetsAsync();
+
+        public bool AddPet(Pet pet);
     }
 }

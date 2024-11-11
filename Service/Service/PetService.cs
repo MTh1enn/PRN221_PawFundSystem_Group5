@@ -25,5 +25,10 @@ namespace Service.Service
         {
             return await _petRepository.GetAllPetsAsync();
         }
+
+        public bool AddPet(Pet pet)
+        {
+            return _petRepository.AddPet(pet);
+        }
     }
 }
