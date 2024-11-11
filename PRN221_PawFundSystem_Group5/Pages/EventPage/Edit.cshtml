@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Event.Status" class="control-label"></label>
-                <input asp-for="Event.Status" class="form-control" />
+                <select asp-for="Event.Status" class="form-control" asp-items="ViewBag.StatusList"></select>
                 <span asp-validation-for="Event.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
