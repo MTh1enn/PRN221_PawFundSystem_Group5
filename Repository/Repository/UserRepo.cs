@@ -12,7 +12,7 @@ namespace Repository.Repository
     public class UserRepo : IUserRepo
     {
         public User GetUserByEmail(string email) => UserDAO.Instance.GetUserByEmail(email);
-        public void AddUser(User user)
+        public bool AddUser(User user)
         => UserDAO.Instance.AddUser(user);
 
         public User GetUserById(int id)
@@ -21,10 +21,10 @@ namespace Repository.Repository
         public List<User> GetUsers()
         => UserDAO.Instance.GetUsers();
 
-        public void RemoveUser(User user)
+        public bool RemoveUser(User user)
         => UserDAO.Instance.RemoveUser(user);
 
-        public void UpdateUser(User user)
+        public bool UpdateUser(User user)
         => UserDAO.Instance.UpdateUser(user);
     }
 }

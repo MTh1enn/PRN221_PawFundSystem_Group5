@@ -40,16 +40,23 @@ namespace DAO
         {
             return dbContext.Users.ToList();
         }
-        public void AddUser(User user)
+        public bool AddUser(User user)
         {
+            bool isSuccess = false;
             var checkUser = GetUserById(user.Id);
             try
             {
                 if (checkUser == null)
                 {
+                    int maxId = dbContext.Users.ToList().Count;
+                    user.Id = maxId + 1;
+                    user.CreatedAt = DateTime.Now;
+
                     dbContext.Users.Add(user);
                     dbContext.SaveChanges();
+                    isSuccess = true;
                 }
+                return isSuccess;
             }
             catch (Exception ex)
             {
@@ -57,8 +64,9 @@ namespace DAO
                 throw;
             }
         }
-        public void UpdateUser(User user)
+        public bool UpdateUser(User user)
         {
+            bool isSuccess = false;
             var checkUser = GetUserById(user.Id);
             try
             {
@@ -68,15 +76,18 @@ namespace DAO
                     dbContext.Users.Attach(user);
                     dbContext.Entry(user).State = EntityState.Modified;
                     dbContext.SaveChanges();
+                    isSuccess = true;
                 }
+                return isSuccess;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public void RemoveUser(User user)
+        public bool RemoveUser(User user)
         {
+            bool isSuccess = false;
             var checkUser = GetUserById(user.Id);
             try
             {
@@ -84,7 +95,9 @@ namespace DAO
                 {
                     dbContext.Users.Remove(user);
                     dbContext.SaveChanges();
+                    isSuccess = true;
                 }
+                return isSuccess;
             }
             catch (Exception ex)
             {

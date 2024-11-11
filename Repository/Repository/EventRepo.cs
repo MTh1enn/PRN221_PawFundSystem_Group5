@@ -11,7 +11,7 @@ namespace Repository.Repository
 {
     public class EventRepo : IEventRepo
     {
-        public void AddEvent(Event ev)
+        public bool AddEvent(Event ev)
         => EventDAO.Instance.AddEvent(ev);
 
         public Event GetEventById(int id)
@@ -20,10 +20,10 @@ namespace Repository.Repository
         public List<Event> GetEvents()
         => EventDAO.Instance.GetEvents();
 
-        public void RemoveEvent(Event ev)
+        public bool RemoveEvent(Event ev)
         => EventDAO.Instance.RemoveEvent(ev);
 
-        public void UpdateEvent(Event ev)
+        public bool UpdateEvent(Event ev)
         => EventDAO.Instance.UpdateEvent(ev);
     }
 }

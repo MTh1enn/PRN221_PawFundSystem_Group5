@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.IService
 {
-    public interface IAdoptionRequestService
+    internal interface IAdoptionRequestService
     {
         Task CreateAdoptionRequestAsync(AdoptionRequest adoptionRequest);
     }

@@ -22,6 +22,8 @@ namespace PawFundSystem.Page.EventPage
         [BindProperty]
         public Event Event { get; set; } = default!;
 
+        public string? Message { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             if (id == null || _eventService.GetEvents() == null)
@@ -53,8 +55,14 @@ namespace PawFundSystem.Page.EventPage
             if (events != null)
             {
                 Event = events;
-                _eventService.RemoveEvent(events);
+                bool checkDelete =_eventService.RemoveEvent(events);
+                if(checkDelete == false)
+                {
+                    Message = "You can't delete event COMPLETED";
+                    return Page();
+                }
             }
+           
 
             return RedirectToPage("./Index");
         }
