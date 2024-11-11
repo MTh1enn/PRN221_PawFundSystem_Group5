@@ -1,65 +1,59 @@
 ﻿@page
-@model PawFundSystem.Page.EventPage.IndexModel
+@model PRN221_PawFundSystem_Group5.Pages.ShelterPage.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Event Management</h1>
+<h1>Shelter Management</h1>
+
 <p>
     <a asp-page="Create">Create New</a>
-    <a asp-page="/Admin">Back to Admin</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Title)
+                @Html.DisplayNameFor(model => model.Shelter[0].ShelterCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Description)
+                @Html.DisplayNameFor(model => model.Shelter[0].Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].StartTime)
+                @Html.DisplayNameFor(model => model.Shelter[0].Phone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].EndTime)
+                @Html.DisplayNameFor(model => model.Shelter[0].Capacity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Location)
+                @Html.DisplayNameFor(model => model.Shelter[0].Available)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].User)
+                @Html.DisplayNameFor(model => model.Shelter[0].ManagedBy)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Event) {
+@foreach (var item in Model.Shelter) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
+                @Html.DisplayFor(modelItem => item.ShelterCode)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManagedBy)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

@@ -12,6 +12,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IPetService, PetService>();
 builder.Services.AddScoped<IAdoptionRequestService, AdoptionRequestService>();
+builder.Services.AddScoped<IShelterService, ShelterService>();
 builder.Services.AddSession();
 
 
