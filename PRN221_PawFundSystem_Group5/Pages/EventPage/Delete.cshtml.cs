@@ -58,7 +58,7 @@ namespace PawFundSystem.Page.EventPage
                 bool checkDelete =_eventService.RemoveEvent(events);
                 if(checkDelete == false)
                 {
-                    Message = "You can't delete event COMPLETED";
+                    Message = "You can't delete event COMPLETED or CANCELLED";
                     return Page();
                 }
             }

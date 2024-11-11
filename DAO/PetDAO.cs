@@ -66,7 +66,7 @@ namespace DAO
             var pet = await context.Pets.FindAsync(petId);
             if (pet == null) return false;
 
-            pet.HealthStatus = healthStatus;
+            pet.HealStatus = healthStatus;
             await context.SaveChangesAsync();
             return true;
         }

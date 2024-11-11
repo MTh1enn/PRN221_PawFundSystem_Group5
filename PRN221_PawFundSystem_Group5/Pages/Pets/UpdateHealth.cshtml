@@ -56,7 +56,7 @@
                         <tr>
                             <td>@pet.Id</td> <!-- Hiển thị ID của thú cưng -->
                             <td>@pet.Name</td>
-                            <td>@pet.HealthStatus</td>
+                            <td>@pet.HealStatus</td>
                             <td>
                                 <form method="post" asp-page-handler="UpdateHealth" asp-route-petId="@pet.Id" class="form-inline">
                                     <select name="healthStatus" class="form-control" required>
