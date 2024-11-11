@@ -24,12 +24,16 @@ namespace PRN221_PawFundSystem_Group5.Pages
             if (email != null && password != null)
             {
                 User account = _userService.GetUserByEmail(email);
-                if (account != null && account.Password!.Equals(password) && account.Role.Equals(1))
+                if (account != null && account.Password!.Equals(password) && account.Role.Equals("Staff"))
                 {
-                   
-                    
+                    string? roleId = account.Role.ToString() ?? "";
+                    string? emailUser = account.Email ?? "";
+                    HttpContext.Session.SetString("RoleID", roleId);
+                    HttpContext.Session.SetString("EmailUser", email);
                     Response.Redirect("/PetPage");
                 }
+
+
                 else
                     Response.Redirect("/Error");
             }

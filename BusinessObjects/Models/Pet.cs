@@ -33,11 +33,17 @@ public partial class Pet
 
     public string? RescueLocation { get; set; }
 
-    public double? RescuedBy { get; set; }
+    public int? RescuedBy { get; set; }
 
     public double? Height { get; set; }
 
     public double? Weight { get; set; }
+
+    public string? HealStatus { get; set; }
+
+    public bool? IsAdopted { get; set; }
+
+    public int? OwnerId { get; set; }
 
     public string? PetStatus { get; set; }
 
@@ -46,6 +52,8 @@ public partial class Pet
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
 
     public virtual ICollection<HealthCheck> HealthChecks { get; set; } = new List<HealthCheck>();
+
+    public virtual User? Owner { get; set; }
 
     public virtual Shelter? Shelter { get; set; }
     public string? HealthStatus { get; set; }

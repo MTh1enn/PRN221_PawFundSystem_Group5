@@ -15,7 +15,7 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
-    public string? Position { get; set; }
+    public string? Role { get; set; }
 
     public string? Address { get; set; }
 
@@ -24,8 +24,6 @@ public partial class User
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
-
-    public int? Role { get; set; }
 
     public string? Status { get; set; }
 
@@ -39,7 +37,7 @@ public partial class User
 
     public virtual ICollection<HealthCheck> HealthChecks { get; set; } = new List<HealthCheck>();
 
-    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+    public virtual ICollection<Pet> Pets { get; set; } = new List<Pet>();
 
     public virtual ICollection<Shelter> Shelters { get; set; } = new List<Shelter>();
 
