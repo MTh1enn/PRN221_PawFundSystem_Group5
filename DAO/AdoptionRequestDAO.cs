@@ -33,5 +33,38 @@ namespace DAO
             dbContext.AdoptionRequests.Add(adoptionRequest);
             await dbContext.SaveChangesAsync();
         }
+        public async Task<List<AdoptionRequest>> GetAll()
+        {
+            return await dbContext.AdoptionRequests
+                .Include(a => a.Pet)
+                .Include(a => a.ReviewedByNavigation)
+                .Include(a => a.User).ToListAsync();
+        }
+        public async Task<AdoptionRequest> GetById(int id)
+        {
+            return await dbContext.AdoptionRequests.FirstOrDefaultAsync(m => m.Id == id);
+        }
+        public bool Update(AdoptionRequest request)
+        {
+            var existing = dbContext.AdoptionRequests.Find(request.Id);
+
+            if (existing == null)
+            {
+                return false;
+            }
+
+            dbContext.Entry(existing).CurrentValues.SetValues(request);
+
+            try
+            {
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
     }
 }

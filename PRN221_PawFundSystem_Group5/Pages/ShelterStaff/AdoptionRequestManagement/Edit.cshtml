@@ -1,0 +1,75 @@
+﻿@page
+@model PRN221_PawFundSystem_Group5.Pages.ShelterStaff.AdoptionRequestManagement.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>AdoptionRequest</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AdoptionRequest.Id" />
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.PetId" class="control-label"></label>
+                <select asp-for="AdoptionRequest.PetId" class="form-control" asp-items="ViewBag.PetId"></select>
+                <span asp-validation-for="AdoptionRequest.PetId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.UserId" class="control-label"></label>
+                <select asp-for="AdoptionRequest.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="AdoptionRequest.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.RequestDate" class="control-label"></label>
+                <input asp-for="AdoptionRequest.RequestDate" class="form-control" />
+                <span asp-validation-for="AdoptionRequest.RequestDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.ReviewDate" class="control-label"></label>
+                <input asp-for="AdoptionRequest.ReviewDate" class="form-control" />
+                <span asp-validation-for="AdoptionRequest.ReviewDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.ReviewedBy" class="control-label"></label>
+                <select asp-for="AdoptionRequest.ReviewedBy" class="form-control" asp-items="ViewBag.ReviewedBy"></select>
+                <span asp-validation-for="AdoptionRequest.ReviewedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.Notes" class="control-label"></label>
+                <input asp-for="AdoptionRequest.Notes" class="form-control" />
+                <span asp-validation-for="AdoptionRequest.Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.Comment" class="control-label"></label>
+                <input asp-for="AdoptionRequest.Comment" class="form-control" />
+                <span asp-validation-for="AdoptionRequest.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.AdoptionDate" class="control-label"></label>
+                <input asp-for="AdoptionRequest.AdoptionDate" class="form-control" />
+                <span asp-validation-for="AdoptionRequest.AdoptionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptionRequest.Status" class="control-label"></label>
+                <input asp-for="AdoptionRequest.Status" class="form-control" />
+                <span asp-validation-for="AdoptionRequest.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

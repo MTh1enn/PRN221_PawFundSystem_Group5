@@ -23,5 +23,20 @@ namespace Service.Service
         {
             await adoptionRequestRepo.CreateAdoptionRequestAsync(adoptionRequest);
         }
+
+        public async Task<List<AdoptionRequest>> GetAll()
+        {
+            return await adoptionRequestRepo.GetAll();
+        }
+
+        public async Task<AdoptionRequest> GetById(int id)
+        {
+            return await adoptionRequestRepo.GetById(id);
+        }
+
+        public bool Update(AdoptionRequest request)
+        {
+            return adoptionRequestRepo.Update(request);
+        }
     }
 }
