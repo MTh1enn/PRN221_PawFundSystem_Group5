@@ -23,9 +23,9 @@ namespace Service.Service
            return userRepo.GetUserByEmail(email);
         }
 
-        public void AddUser(User user)
+        public bool AddUser(User user)
         {
-            userRepo.AddUser(user);
+            return userRepo.AddUser(user);
         }
 
         public User GetUserById(int id)
@@ -38,14 +38,14 @@ namespace Service.Service
             return userRepo.GetUsers();
         }
 
-        public void RemoveUser(User user)
+        public bool RemoveUser(User user)
         {
-            userRepo.RemoveUser(user);
+            return userRepo.RemoveUser(user);
         }
 
-        public void UpdateUser(User user)
+        public bool UpdateUser(User user)
         {
-            userRepo.UpdateUser(user);
+            return userRepo.UpdateUser(user);
         }
     }
 }

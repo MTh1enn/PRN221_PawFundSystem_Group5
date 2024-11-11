@@ -43,6 +43,8 @@ namespace DAO
             {
                 if (checkEvent == null)
                 {
+                    int maxId = dbContext.Events.ToList().Count;
+                    ev.Id = maxId + 1;
                     ev.Status = "SCHEDULED";
                     dbContext.Events.Add(ev);
                     dbContext.SaveChanges();

@@ -12,8 +12,8 @@ namespace Service.IService
         public User GetUserByEmail(string email);
         public User GetUserById(int id);
         public List<User> GetUsers();
-        public void AddUser(User user);
-        public void UpdateUser(User user);
-        public void RemoveUser(User user);
+        public bool AddUser(User user);
+        public bool UpdateUser(User user);
+        public bool RemoveUser(User user);
     }
 }
