@@ -27,6 +27,11 @@ namespace DAO
         {
             dbContext = new PawFundContext();
         }
+
+        public User GetUserByEmail(string email)
+        {
+            return dbContext.Users.SingleOrDefault(m => m.Email.Equals(email));
+        }
         public User GetUserById(int id)
         {
             return dbContext.Users.SingleOrDefault(m => m.Id.Equals(id));

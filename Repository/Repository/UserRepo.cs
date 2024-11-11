@@ -11,6 +11,7 @@ namespace Repository.Repository
 {
     public class UserRepo : IUserRepo
     {
+        public User GetUserByEmail(string email) => UserDAO.Instance.GetUserByEmail(email);
         public void AddUser(User user)
         => UserDAO.Instance.AddUser(user);
 
